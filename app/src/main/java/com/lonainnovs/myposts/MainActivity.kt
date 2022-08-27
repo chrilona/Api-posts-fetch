@@ -29,11 +29,10 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful){
                     var posts = response.body()
                     Toast.makeText(baseContext,"fetched ${posts!!.size} posts",Toast.LENGTH_LONG).show()
-                    var adapter = PostsRvAdapter(baseContext,posts)
-                    Log.d("Tag",posts.toString())
+                    var adapter = PostsRvAdapter(posts)
                     binding.rvPosts.adapter = adapter
                     binding.rvPosts.layoutManager=LinearLayoutManager(baseContext)
-
+//                    if(posts!=null){}
                 }
             }
 

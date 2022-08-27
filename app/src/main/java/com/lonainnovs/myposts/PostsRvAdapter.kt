@@ -8,11 +8,16 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.lonainnovs.myposts.databinding.PostListItemBinding
 
-class PostsRvAdapter(var context: Context,var posts:List<Post>): RecyclerView.Adapter<PostViewHolder>()  {
+class PostsRvAdapter(var posts: List<Post>): RecyclerView.Adapter<PostViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         var binding= PostListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return PostViewHolder(binding)
     }
+//    class PostsRvAdapter(var posts: Context): RecyclerView.Adapter<PostViewHolder>()  {
+//        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
+//            var binding= PostListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+//            return PostViewHolder(binding)
+//        }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
       var currentPost = posts.get(position)
@@ -21,6 +26,13 @@ class PostsRvAdapter(var context: Context,var posts:List<Post>): RecyclerView.Ad
           tvId.text = currentPost.id.toString()
           tvTitle.text = currentPost.title
           tvBody.text = currentPost.body
+
+          val context = holder.itemView.context
+          holder.binding.cvPosts.setOnClickListener {
+              val intent = Intent(context,CommentActivity::class.java)
+              intent.putExtra("POST_ID",currentPost.id)
+              context.startActivity(intent)
+          }
        }
     }
 
